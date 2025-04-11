@@ -1,0 +1,105 @@
+h1{
+    text-align: center;
+    margin-top: 20px;
+}
+
+table {
+    width: 80%;
+    /* Increased width */
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: auto;
+    /* Center align table */
+    margin-right: auto;
+    /* Center align table */
+}
+
+.beneficiary-name {
+    width: 300px;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    /* Add background color for better visibility */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center the input area */
+    margin-bottom: 20px;
+}
+
+.input-area label {
+    margin-right: 10px;
+    font-size: 16px;
+    /* Adjust label font size */
+}
+
+.input-area input[type="file"] {
+    display: none;
+    /* Hide the actual file input */
+}
+
+.input-area .file-input-label {
+    /* Style the label as a button */
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 10px;
+    /* Add some spacing */
+}
+
+.input-area .file-input-label:hover {
+    background-color: #45a049;
+}
+
+.input-area input[type="text"] {
+    width: 300px;
+    height: 22px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    /* Adjust input font size */
+}
+
+.input-area button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    /* Adjust button font size */
+    margin-left: 10px;
+}
+
+.input-area button:hover {
+    background-color: #0056b3;
+}
+
+#fileName {
+    margin: 10px;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consulta</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body>
+  <h1>Consulta</h1>
+
+  <div id="loading" style="display: none;">Loading...</div>
+  <div class="input-area">
+    <label for="csvFileInput" class="file-input-label">Escolher Arquivo</label>
+    <input type="file" id="csvFileInput" accept=".csv">
+    <span id="fileName"></span>
+    <label for="searchInput">Pesquisa por matrícula ou nome:</label>
+    <input type="text" id="searchInput" name="searchInput">
+    <button onclick="searchData()">Pesquisar</button>
+  </div>
+  <table id="resultsTable">
+      <thead>
+        <tr>
+            <th>Código do Beneficiário</th>
+            <th class="beneficiary-name">Nome Beneficiário</th>
+            <th>Código do Dependente</th>
+            <th>Nome Dependente</th>
+            <th>Matrícula</th>
+            <th>Tipo</th>
+            <th>Sexo</th>
+            <th>Dt. Nascimento</th>
+            <th>Idade</th>
+            <th>Início Vigência</th>
+            <th>Fim Vigência</th>
+            <th>Plano</th>
+        </tr>
+      </thead>
+      <tbody id="resultsBody">
+
+      </tbody>
+    </table>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
