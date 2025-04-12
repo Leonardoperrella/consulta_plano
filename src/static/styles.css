@@ -3,23 +3,39 @@ h1{
     margin-top: 20px;
 }
 
-table {
-    width: 80%;
-    /* Increased width */
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-left: auto;
-    /* Center align table */
-    margin-right: auto;
-    /* Center align table */
+.loading-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;        /* Use flexbox for centering */
+    flex-direction: column; /* Arrange content vertically */
+    align-items: center;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #007bff; /* Use a color that matches your design */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
 }
 
 .beneficiary-name {
-    width: 300px;
+    width: auto; /* Changed to auto for flexibility */
+    max-width: 100%; /* Ensure it doesn't overflow */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
 th,
-td {
+td{
     border: 1px solid black;
     padding: 8px;
     text-align: left;
@@ -42,10 +58,15 @@ tbody tr:hover {
 
 .input-area {
     display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap */
     align-items: center;
     justify-content: center;
     /* Center the input area */
     margin-bottom: 20px;
+}
+
+.input-area > * {  /* Add some spacing between wrapped items */
+    margin: 5px;
 }
 
 .input-area label {
@@ -75,14 +96,16 @@ tbody tr:hover {
 }
 
 .input-area input[type="text"] {
-    width: 300px;
+    width: 100%; /* Make input take full width */
+    max-width: 300px; /* But limit to 300px on larger screens */
+    /* Remove individual height/padding from input and button */
     height: 22px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
-    /* Adjust input font size */
 }
+
 
 .input-area button {
     padding: 10px 15px;
@@ -102,4 +125,59 @@ tbody tr:hover {
 
 #fileName {
     margin: 10px;
+}
+
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .input-area {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: stretch; /* Stretch items to full width */
+    }
+
+    .input-area > * {
+        margin: 5px 0; /* Adjust margin for stacked items */
+    }
+
+    .input-area input[type="text"] {
+        max-width: 100%; /* Input takes full width on small screens */
+    }
+
+    .input-area label {
+        margin-right: 0; /* Remove right margin on stacked labels */
+        margin-bottom: 5px; /* Add bottom margin to labels */
+        text-align: center
+    }
+
+    table {
+        overflow-x: auto; /* Enable horizontal scrolling for the table */
+        display: block; /* Required for overflow-x to work */
+    }
+        /* Add this to make buttons full width and prevent overflow */
+    .input-area button,
+    .input-area .file-input-label {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
