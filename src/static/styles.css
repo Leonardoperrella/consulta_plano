@@ -1,22 +1,30 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 h1{
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
+    color: #2c3e50;
 }
 
 .loading-content {
     background-color: white;
-    padding: 20px;
-    border-radius: 5px;
+    padding: 30px;
+    border-radius: 8px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    display: flex;        /* Use flexbox for centering */
-    flex-direction: column; /* Arrange content vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 15px;
 }
 
 .spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #007bff; /* Use a color that matches your design */
+    border: 5px solid rgba(0, 0, 0, 0.15);
+    border-left-color: #2c3e50;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -31,29 +39,30 @@ h1{
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 30px;
+    border: 1px solid #e0e0e0;
 }
 
 th,
 td{
-    border: 1px solid black;
-    padding: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 12px;
     text-align: left;
 }
 
 thead {
     position: sticky;
     top: 0;
-    background-color: #f2f2f2;
-    /* Add background color for better visibility */
+    background-color: #e0e0e0;
+    color: #2c3e50;
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
+    background-color: #f7f7f7;
 }
 
 tbody tr:hover {
-    background-color: #f2f2f2;
+    background-color: #e8e8e8;
 }
 
 .input-area {
@@ -61,16 +70,23 @@ tbody tr:hover {
     flex-wrap: wrap; /* Allow elements to wrap */
     align-items: center;
     justify-content: center;
-    /* Center the input area */
     margin-bottom: 20px;
+    flex-direction: column;
+}
+
+.input-area > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
 }
 
 .input-area > * {  /* Add some spacing between wrapped items */
-    margin: 5px;
+    margin: 8px;
 }
 
 .input-area label {
-    margin-right: 10px;
     font-size: 16px;
     /* Adjust label font size */
 }
@@ -81,46 +97,45 @@ tbody tr:hover {
 }
 
 .input-area .file-input-label {
-    /* Style the label as a button */
-    padding: 10px 15px;
-    background-color: #4CAF50;
+    padding: 12px 18px;
+    background-color: #2c3e50;
     color: white;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
-    margin-right: 10px;
-    /* Add some spacing */
+    transition: background-color 0.3s ease;
 }
 
 .input-area .file-input-label:hover {
-    background-color: #45a049;
+    background-color: #233140;
 }
 
 .input-area input[type="text"] {
     width: 100%; /* Make input take full width */
     max-width: 300px; /* But limit to 300px on larger screens */
     /* Remove individual height/padding from input and button */
-    height: 22px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     font-size: 16px;
 }
 
 
 .input-area button {
     padding: 10px 15px;
-    background-color: #007bff;
+    width: 173px;
+    background-color: #2c3e50;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    /* Adjust button font size */
-    margin-left: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .input-area button:hover {
-    background-color: #0056b3;
+    background-color: #233140;
 }
 
 #fileName {
@@ -133,25 +148,31 @@ tbody tr:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
+
 /* Media query for smaller screens */
 @media (max-width: 768px) {
-    .input-area {
-        flex-direction: column; /* Stack elements vertically */
-        align-items: stretch; /* Stretch items to full width */
+    .input-area > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
     }
 
-    .input-area > * {
-        margin: 5px 0; /* Adjust margin for stacked items */
+    .input-area {
+        align-items: stretch; /* Stretch items to full width */
     }
 
     .input-area input[type="text"] {
         max-width: 100%; /* Input takes full width on small screens */
+        box-sizing: border-box;
+        width: calc(100% - 20px);
+        padding: 10px;
     }
 
     .input-area label {
@@ -159,19 +180,20 @@ tbody tr:hover {
         margin-bottom: 5px; /* Add bottom margin to labels */
         text-align: center
     }
+     .input-area .file-input-label { word-break: break-word; }
 
     table {
         overflow-x: auto; /* Enable horizontal scrolling for the table */
         display: block; /* Required for overflow-x to work */
     }
         /* Add this to make buttons full width and prevent overflow */
-    .input-area button,
-    .input-area .file-input-label {
-        width: 100%;
-        max-width: 100%;
+    .input-area button,.input-area .file-input-label {
+        width: calc(100% - 20px); /* Adjust width to account for padding */
+        max-width: calc(100% - 20px);
+        box-sizing: border-box;
+
     }
 }
-
 
 @keyframes spin {
     0% {

@@ -4,6 +4,7 @@ const fileInput = document.getElementById('csvFileInput');
 const excelFileInput = document.getElementById('excelFileInput');
 const searchInput = document.getElementById('searchInput');
 const fileNameDisplay = document.getElementById('fileName'); // Add this line
+const excelFileNameDisplay = document.getElementById('excelFileName');
 
 excelFileInput.addEventListener('change', handleExcelFileSelect);
 searchInput.addEventListener('keypress', function (event) {
@@ -50,6 +51,11 @@ async function handleExcelFileSelect(event) {
     const file = event.target.files[0];
     if (!file) return;
 
+     if (!file) {
+        excelFileNameDisplay.textContent = '';
+        return;
+    }
+    excelFileNameDisplay.textContent = file.name;
     const formData = new FormData();
     formData.append('file', file); // 'file' é o nome do campo que o servidor espera
     try {
@@ -61,7 +67,6 @@ async function handleExcelFileSelect(event) {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data)
             if (data.error) {
                 alert('Erro ao processar o arquivo: ' + data.error);
             } else {
@@ -105,6 +110,39 @@ function displayResults(results) {
         resultsBody.appendChild(row);
     });
     document.getElementById('loading').style.display = 'none';
+    attachCopyEventListeners();
+}
+
+function attachCopyEventListeners() {
+    const cells = document.querySelectorAll('#resultsBody td');
+    cells.forEach(cell => {
+        cell.addEventListener('click', function() {
+            const text = this.textContent;
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                   showToast(`Conteúdo copiado: ${text}`);
+                })
+                .catch(err => {
+
+                    console.error('Failed to copy text: ', err);
+                });
+        });
+    });
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+        toast.style.cssText = `
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        background-color: #333; color: white; padding: 10px 20px; border-radius: 5px;
+        opacity: 0.9; z-index: 1000; transition: opacity 0.5s ease-in-out;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 500); // Remove the toast after fade out
+    }, 2000); // Toast disappears after 2 seconds
 }
 
 async function searchData() {

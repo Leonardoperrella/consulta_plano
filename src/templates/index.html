@@ -20,13 +20,17 @@
   <div class="input-area">
     <!-- <label for="csvFileInput" class="file-input-label">Escolher Arquivo</label>
     <input type="file" id="csvFileInput" accept=".csv" hidden> -->
-    <span id="fileName"></span>
-    <label for="excelFileInput" class="file-input-label">Escolha arquivo Excel</label>
-    <input type="file" id="excelFileInput" accept=".xlsx, .xls" hidden>
-    <span id="excelFileName"></span>
-    <label for="searchInput">Pesquisa por matrícula ou nome beneficiário:</label>
-    <input type="text" id="searchInput" name="searchInput" >
-    <button onclick="searchData()">Pesquisar</button>
+    <div class="file-input-container">
+      <span id="fileName"></span>
+      <label for="excelFileInput" class="file-input-label">Escolha arquivo Excel</label>
+      <input type="file" id="excelFileInput" accept=".xlsx, .xls" hidden>
+      <span id="excelFileName">Arquivo excel não selecionado</span>
+    </div>
+    <div class="search-input-container">
+      <label for="searchInput">Pesquisa por matrícula ou nome beneficiário:</label>
+      <input type="text" id="searchInput" name="searchInput" >
+      <button onclick="searchData()">Pesquisar</button>
+    </div>
   </div>
   <table id="resultsTable">
       <thead>
