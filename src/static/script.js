@@ -93,6 +93,10 @@ function displayResults(results) {
     }
     results.forEach(item => {
         const row = document.createElement('tr');
+        const formattedDtNasc = formatDate(item.dt_nasc);
+        const formattedInicioVigencia = formatDate(item.inicio_vigencia);
+        const formattedFimVigencia = formatDate(item.fim_vigencia);
+
         row.innerHTML = `
             <td>${item.cod_benef || ''}</td>
             <td>${item.nome_benef || ''}</td>
@@ -101,10 +105,10 @@ function displayResults(results) {
             <td>${item.matricula || ''}</td>
             <td>${item.tipo || ''}</td>
             <td>${item.sexo || ''}</td>
-            <td>${item.dt_nasc || ''}</td>
+            <td>${formattedDtNasc || ''}</td>
             <td>${item.idade || ''}</td>
-            <td>${item.inicio_vigencia || ''}</td>
-            <td>${item.fim_vigencia || ''}</td>
+            <td>${formattedInicioVigencia || ''}</td>
+            <td>${formattedFimVigencia || ''}</td>
             <td>${item.plano || ''}</td>
         `;
         resultsBody.appendChild(row);
@@ -178,4 +182,12 @@ function formatScientificString(str) {
 
     // Verifica se é um número válido e retorna formatado
     return isNaN(num) ? str : num.toLocaleString('pt-BR');
+}
+
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const [year, month, day] = dateString.split('-');
+    if (year && month && day)
+        return `${day}/${month}/${year}`;
+    return dateString
 }
