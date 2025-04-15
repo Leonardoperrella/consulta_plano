@@ -68,12 +68,13 @@ tbody tr:hover {
 }
 
 .input-area {
+    width: fit-content;
     display: flex;
     flex-wrap: wrap; /* Allow elements to wrap */
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 .input-area > div {
@@ -81,7 +82,6 @@ tbody tr:hover {
     align-items: center;
     gap: 10px;
     width: 100%;
-    justify-content: center;
 }
 
 .input-area > * {  /* Add some spacing between wrapped items */
@@ -140,9 +140,6 @@ tbody tr:hover {
     background-color: #233140;
 }
 
-#fileName {
-    margin: 10px;
-}
 
 #loading {
     position: fixed;
@@ -182,12 +179,24 @@ tbody tr:hover {
         margin-bottom: 5px; /* Add bottom margin to labels */
         text-align: center
     }
-     .input-area .file-input-label { word-break: break-word; }
+
+    .input-area .file-input-label { word-break: break-word; }
+
+    table thead {
+        position: sticky;
+        top: 0;
+    }
+
+    .table-container {
+        overflow-x: auto; /* Enable horizontal scrolling for the table */
+        position: relative;
+        max-width: 100%;
+      }
 
     table {
-        overflow-x: auto; /* Enable horizontal scrolling for the table */
-        display: block; /* Required for overflow-x to work */
+      display: table;
     }
+
         /* Add this to make buttons full width and prevent overflow */
     .input-area button,.input-area .file-input-label {
         width: calc(100% - 20px); /* Adjust width to account for padding */
