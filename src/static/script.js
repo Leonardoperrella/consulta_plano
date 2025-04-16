@@ -1,6 +1,17 @@
 let csvData = []; // Global variable to store CSV data
 
 const fileInput = document.getElementById('csvFileInput');
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => toggleBackToTopButton(backToTopButton));
+    backToTopButton.addEventListener('click', () => scrollToTop());
+    toggleBackToTopButton(backToTopButton);
+});
+
+
+
 const excelFileInput = document.getElementById('excelFileInput');
 const searchInput = document.getElementById('searchInput');
 const fileNameDisplay = document.getElementById('fileName'); // Add this line
@@ -15,7 +26,9 @@ searchInput.addEventListener('keypress', function (event) {
 
 async function handleExcelFileSelect(event) {
     const file = event.target.files[0];
-    if (!file) return;
+    if (!file) {
+      return;
+    }
 
      if (!file) {
         excelFileNameDisplay.textContent = '';
@@ -54,7 +67,7 @@ function displayResults(results) {
     resultsBody.innerHTML = '';
     if (!results || results.length === 0) {
         const row = document.createElement('tr');
-        row.innerHTML = '<td colspan="12">No results found</td>';
+        row.innerHTML = '<td colspan="12">Não encontrou resultado para a pesquisa</td>';
         resultsBody.appendChild(row);
     }
     results.forEach(item => {
@@ -138,7 +151,9 @@ async function searchData() {
 
 function formatScientificString(str) {
 
-    if (str === null || str === undefined || str === '' || str == '0') return '';
+    if (str === null || str === undefined || str === '' || str == '0') {
+      return '';
+    }
 
     // Remove vírgula e troca por ponto, se necessário (caso venha no formato "9,0000E+16")
     const normalized = str.replace(',', '.');
@@ -151,9 +166,36 @@ function formatScientificString(str) {
 }
 
 function formatDate(dateString) {
-    if (!dateString) return '';
+    if (!dateString) {
+      return '';
+    }
     const [year, month, day] = dateString.split('-');
-    if (year && month && day)
-        return `${day}/${month}/${year}`;
+    if (year && month && day) {
+      return `${day}/${month}/${year}`;
+    }
     return dateString
+}
+
+
+function toggleBackToTopButton(button) {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        button.style.display = 'block';
+    } else {
+        button.style.display = 'none';
+    }
+}
+
+
+
+function scrollToTop() {
+    const start = window.pageYOffset;
+    const duration = 500; // You can adjust the duration of the scroll
+    const startTime = performance.now();
+
+    function animate(currentTime) {
+        const elapsedTime = currentTime - startTime;
+        window.scrollTo(0, Math.max(0, start - (start * elapsedTime / duration)));
+        if (elapsedTime < duration) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
 }
